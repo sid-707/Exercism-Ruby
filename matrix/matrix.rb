@@ -9,15 +9,19 @@ To get started with TDD, see the `README.md` file in your
 class Matrix
   def initialize(string="")
     @rows = string.split("\n")
+
+    @rows.map! do |row|
+      row.split(" ").map!(&:to_i)
+    end
   end
 
   def row(row)
-    @rows[row-1].split.map(&:to_i)
+    @rows[row-1]
   end
 
   def column(column)
-    @rows.map.with_index do |_row, index|
-        row(index + 1)[column - 1]
+    @rows.map do |row|
+        row[column - 1]
     end
   end
 end
